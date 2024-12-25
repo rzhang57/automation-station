@@ -16,7 +16,8 @@ lock = threading.Lock()
 def auto_click():
     while True:
         with lock:
-            if not active or target_window != gw.getActiveWindow().title:
+            active_window = gw.getActiveWindow()
+            if not active or active_window is None or target_window != active_window.title:
                 continue
             pyautogui.click()
             print("click")
@@ -27,7 +28,8 @@ def auto_click():
 def auto_move():
     while True:
         with lock:
-            if not active or target_window != gw.getActiveWindow().title:
+            active_window = gw.getActiveWindow()
+            if not active or active_window is None or target_window != active_window.title:
                 continue
             movement = random.randint(1, 8)
             move_time = random.randint(6, 30)
